@@ -14,8 +14,6 @@ class BaseElement {
     draw() {}
     update() {}
 }
-
-// TODO: consider using mix-in class or not :)
 class Background extends BaseElement {
     constructor(game, name) {
         super(game, name)
@@ -36,6 +34,10 @@ class Player extends BaseElement {
     constructor(game, name) {
         super(game, name)
         this.speed = 15
+        this.x = 100
+        this.y = 300
+        this.w = 100
+        this.h = 80
     }
     moveH(x) {
         if (x < 0) {
@@ -66,5 +68,22 @@ class Player extends BaseElement {
     }
     moveDown() {
         this.moveV(this.y + this.speed)
+    }
+}
+
+class Enemy extends BaseElement {
+    constructor(game, name) {
+        super(game, name)
+        this.y = 0
+        this.counter = 0
+        this.speed = 1
+    }
+    update() {
+        if (this.counter >= this.h) {
+            this.y -= this.counter
+            this.counter = 0
+        }
+        this.y += this.speed
+        this.counter += this.speed
     }
 }

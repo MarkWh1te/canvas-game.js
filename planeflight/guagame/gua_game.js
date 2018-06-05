@@ -25,7 +25,7 @@ class GuaGame {
         return this.i
     }
     drawGuaimg(guaimg) {
-        this.context.drawImage(guaimg.texture, guaimg.x, guaimg.y)
+        this.context.drawImage(guaimg.texture, guaimg.x, guaimg.y, guaimg.w, guaimg.h)
     }
     // update
     update() {
