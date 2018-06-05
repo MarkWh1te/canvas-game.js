@@ -15,7 +15,7 @@ class GuaGame {
         window.addEventListener('keydown', event => {
             this.keydowns[event.key] = true
         })
-        window.addEventListener('keyup', function(event){
+        window.addEventListener('keyup', function(event) {
             self.keydowns[event.key] = false
         })
         this.init()
@@ -25,8 +25,8 @@ class GuaGame {
         this.i = this.i || new this(...args)
         return this.i
     }
-    drawImage(img) {
-        this.context.drawImage(img.image, img.x, img.y)
+    drawGuaimg(guaimg) {
+        this.context.drawImage(guaimg.texture, guaimg.x, guaimg.y)
     }
     // update
     update() {
@@ -47,7 +47,7 @@ class GuaGame {
         var actions = Object.keys(g.actions)
         for (var i = 0; i < actions.length; i++) {
             var key = actions[i]
-            if(g.keydowns[key]) {
+            if (g.keydowns[key]) {
                 // 如果按键被按下, 调用注册的 action
                 g.actions[key]()
             }
@@ -59,9 +59,9 @@ class GuaGame {
         // draw
         g.draw()
         // next run loop
-        setTimeout(function(){
+        setTimeout(function() {
             g.runloop()
-        }, 1000/window.fps)
+        }, 1000 / window.fps)
     }
     imageByName(name) {
         var g = this
@@ -78,9 +78,9 @@ class GuaGame {
         var g = this
         g.scene = scene
         // 开始运行程序
-        setTimeout(function(){
+        setTimeout(function() {
             g.runloop()
-        }, 1000/window.fps)
+        }, 1000 / window.fps)
     }
     replaceScene(scene) {
         this.scene = scene
