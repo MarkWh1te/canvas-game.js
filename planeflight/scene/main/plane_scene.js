@@ -2,6 +2,7 @@ class PlaneScene extends GuaScene {
     constructor(game) {
         super(game)
         // this.background = GuaImage.new(game, 'ball')
+        this.numberOfEnimies = 13
         this.setup()
     }
     setup() {
@@ -48,8 +49,8 @@ class PlaneScene extends GuaScene {
         this.addEnymies()
     }
     addEnymies() {
-        this.addElement(Enemy.new(this.game, 'enemy1'))
-        this.addElement(Enemy.new(this.game, 'enemy2'))
-        this.addElement(Enemy.new(this.game, 'enemy3'))
+        for (var i = 0; i < this.numberOfEnimies; i++) {
+            this.addElement(Enemy.new(this.game))
+        }
     }
 }
