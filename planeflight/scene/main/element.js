@@ -73,7 +73,7 @@ class Player extends BaseElement {
     fire() {
         if (this.cooldown == 0) {
             this.cooldown = 3
-            let x = this.x
+            let x = this.x + (this.w / 2)
             let y = this.y
             let bullet = Bullet.new(this.game)
             bullet.x = x
@@ -119,7 +119,7 @@ class Bullet extends BaseElement {
         this.h = 30
     }
     setup() {
-        this.speed = 1
+        this.speed = 30
     }
     update() {
         this.y -= this.speed
