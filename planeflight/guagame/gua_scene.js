@@ -12,7 +12,8 @@ class GuaScene {
         this.elements.push(element)
     }
     draw() {
-        this.elements.map(x => this.game.drawGuaimg(x))
+        // this.elements.map(x => this.game.drawGuaimg(x))
+        this.elements.map(x => x.draw())
     }
     update() {
         this.elements.map(x => x.update())

@@ -12,7 +12,9 @@ class BaseElement {
         var i = new this(game, name)
         return i
     }
-    draw() {}
+    draw() {
+        this.game.drawGuaimg(this)
+    }
     update() {}
 }
 class Background extends BaseElement {
@@ -119,9 +121,35 @@ class Bullet extends BaseElement {
         this.h = 30
     }
     setup() {
-        this.speed = 30
+        this.speed = 23
     }
     update() {
         this.y -= this.speed
+    }
+}
+
+class Particle extends BaseElement {
+    constructor(game) {
+        name = "particle"
+        super(game, name)
+        this.setup()
+    }
+    setup() {
+        this.life = 10
+        this.x = 200
+        this.y = 200
+        this.a = 0.001
+        this.w = 7
+        this.h = 7
+        this.speed = 2
+        this.vx = randomRange(-this.speed, this.speed)
+        this.vy = randomRange(-this.speed, this.speed)
+    }
+    update() {
+        this.life -= 1
+        this.vx += this.a * this.vx
+        this.vy += this.a * this.vy
+        this.x += this.vx
+        this.y += this.vy
     }
 }

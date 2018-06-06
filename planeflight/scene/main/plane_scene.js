@@ -50,6 +50,11 @@ class PlaneScene extends GuaScene {
         this.player = Player.new(this.game, 'player')
         this.addElement(this.player)
         this.addEnymies()
+
+        // test ParticleSystem
+        let ps = ParticleSystem.new(this.game)
+        ps.scene = this
+        this.addElement(ps)
     }
     addEnymies() {
         for (var i = 0; i < this.numberOfEnimies; i++) {

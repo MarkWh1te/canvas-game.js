@@ -43,10 +43,14 @@ var __main = function() {
         enemy3: 'img/enemy3.png',
         enemy4: 'img/enemy4.png',
         bullet: 'img/bullet.png',
+        particle: 'img/particle.png',
     }
     var game = GuaGame.instance(30, images, function(g) {
         // var s = SceneTitle.new(g)
-        var s = PlaneScene.new(g)
+        // var s = PlaneScene.new(g)
+
+        var s = ParticleScene.new(g)
+        log('start scene', s)
         g.runWithScene(s)
     })
 
