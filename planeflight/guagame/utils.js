@@ -17,3 +17,7 @@ var rectIntersects = function(a, b) {
     }
     return false
 }
+const randomRange = (start, end) => {
+    n = Math.floor(Math.random() * (end - start + 1)) + start
+    return n
+}

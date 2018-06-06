@@ -6,6 +6,7 @@ class BaseElement {
         this.y = 0
         this.w = this.texture.width
         this.h = this.texture.height
+        this.cooldown = 0
     }
     static new(game, name) {
         var i = new this(game, name)
@@ -69,21 +70,58 @@ class Player extends BaseElement {
     moveDown() {
         this.moveV(this.y + this.speed)
     }
+    fire() {
+        if (this.cooldown == 0) {
+            this.cooldown = 3
+            let x = this.x
+            let y = this.y
+            let bullet = Bullet.new(this.game)
+            bullet.x = x
+            bullet.y = y
+            this.scene.addElement(bullet)
+        }
+    }
+    update() {
+        if (this.cooldown > 0) {
+            this.cooldown--
+        }
+    }
 }
 
 class Enemy extends BaseElement {
-    constructor(game, name) {
+    constructor(game) {
+        let type = randomRange(0, 4)
+        name = "enemy" + String(type)
         super(game, name)
-        this.y = 0
-        this.counter = 0
+        this.setup()
+    }
+    setup() {
+        this.speed = randomRange(1, 3)
+        this.x = randomRange(0, 400 - this.w)
+        this.y = -randomRange(300, 500)
+        this.w = randomRange(120, 140)
+        this.h = randomRange(100, 120)
+    }
+    update() {
+        if (this.y > 700) {
+            this.setup()
+        }
+        this.y += this.speed
+    }
+}
+
+class Bullet extends BaseElement {
+    constructor(game) {
+        name = "bullet"
+        super(game, name)
+        this.setup()
+        this.w = 30
+        this.h = 30
+    }
+    setup() {
         this.speed = 1
     }
     update() {
-        if (this.counter >= this.h) {
-            this.y -= this.counter
-            this.counter = 0
-        }
-        this.y += this.speed
-        this.counter += this.speed
+        this.y -= this.speed
     }
 }

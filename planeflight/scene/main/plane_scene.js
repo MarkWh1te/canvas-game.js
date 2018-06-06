@@ -35,6 +35,9 @@ class PlaneScene extends GuaScene {
         this.game.registerAction('s', () => {
             this.player.moveDown()
         })
+        this.game.registerAction(' ', () => {
+            this.player.fire()
+        })
     }
     setupElements() {
         // order matters!!
