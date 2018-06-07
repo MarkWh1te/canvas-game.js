@@ -61,6 +61,8 @@ class ParticleSystem {
         }
         if (this.particles.length < this.numberOfParticles) {
             let p = Particle.new(this.game)
+            p.x = this.x
+            p.y = this.y
             this.particles.push(p)
         }
         this.particles = this.particles.filter(x => x.life > 0)

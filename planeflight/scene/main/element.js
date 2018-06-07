@@ -80,6 +80,8 @@ class Player extends BaseElement {
             let bullet = Bullet.new(this.game)
             bullet.x = x
             bullet.y = y
+            bullet.scene = this.scene
+            this.scene.bullets.push(bullet)
             this.scene.addElement(bullet)
         }
     }
@@ -103,12 +105,30 @@ class Enemy extends BaseElement {
         this.y = -randomRange(300, 500)
         this.w = randomRange(120, 140)
         this.h = randomRange(100, 120)
+        this.life = 2
     }
     update() {
-        if (this.y > 700) {
+        if (this.y > 700 || this.explosion()) {
             this.setup()
         }
         this.y += this.speed
+    }
+    explosion() {
+        for (var i = 0; i < this.scene.bullets.length; i++) {
+            let b = this.scene.bullets[i]
+            if (rectIntersects(this, b)) {
+                this.life -= 1
+                // bullet explod when hit the enemy
+                b.die()
+                let ps = ParticleSystem.new(this.game)
+                ps.x = this.x + (this.w / 2)
+                ps.y = this.y + (this.h / 2)
+                ps.scene = this.scene
+                log(ps.x)
+                this.scene.addElement(ps)
+            }
+        }
+        return this.life <= 0
     }
 }
 
@@ -125,6 +145,21 @@ class Bullet extends BaseElement {
     }
     update() {
         this.y -= this.speed
+        if (this.out_of_range()) {
+            this.die()
+        }
+    }
+    die() {
+        this.scene.bullets = this.scene.bullets.filter(x => x != this)
+        this.scene.elements = this.scene.elements.filter(x => x != this)
+    }
+    out_of_range() {
+        let h = this.y + this.scene.player.y
+        log(this.scene.player.y, this.y)
+        if (this.y < 79) {
+            return true
+        }
+        return false
     }
 }
 

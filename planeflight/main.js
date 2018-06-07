@@ -47,9 +47,9 @@ var __main = function() {
     }
     var game = GuaGame.instance(30, images, function(g) {
         // var s = SceneTitle.new(g)
-        // var s = PlaneScene.new(g)
+        var s = PlaneScene.new(g)
 
-        var s = ParticleScene.new(g)
+        // var s = ParticleScene.new(g)
         log('start scene', s)
         g.runWithScene(s)
     })
