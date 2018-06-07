@@ -50,11 +50,15 @@ class PlaneScene extends GuaScene {
         this.bullets = []
         this.player = Player.new(this.game, 'player')
         this.addElement(this.player)
+
+        this.enemies = []
         this.addEnymies()
     }
     addEnymies() {
         for (var i = 0; i < this.numberOfEnimies; i++) {
-            this.addElement(Enemy.new(this.game))
+            let e = Enemy.new(this.game)
+            this.enemies.push(e)
+            this.addElement(e)
         }
     }
 }

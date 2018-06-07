@@ -41,6 +41,7 @@ class Player extends BaseElement {
         this.y = 300
         this.w = 100
         this.h = 80
+        this.life = 1
     }
     moveH(x) {
         if (x < 0) {
@@ -86,9 +87,23 @@ class Player extends BaseElement {
         }
     }
     update() {
+        if (this.die()) {
+            var s = SceneEnd.new(this.game)
+            this.game.replaceScene(s)
+        }
         if (this.cooldown > 0) {
             this.cooldown--
         }
+    }
+
+    die() {
+        for (var i = 0; i < this.scene.enemies.length; i++) {
+            let e = this.scene.enemies[i]
+            if (rectIntersects(this, e)) {
+                this.life -= 1
+            }
+        }
+        return this.life <= 0
     }
 }
 
