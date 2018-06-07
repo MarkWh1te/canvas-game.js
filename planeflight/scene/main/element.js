@@ -116,7 +116,7 @@ class Enemy extends BaseElement {
     explosion() {
         for (var i = 0; i < this.scene.bullets.length; i++) {
             let b = this.scene.bullets[i]
-            if (rectIntersects(this, b)) {
+            if (rectIntersects(this, b) && this.y > 0) {
                 this.life -= 1
                 // bullet explod when hit the enemy
                 b.die()
@@ -155,8 +155,7 @@ class Bullet extends BaseElement {
     }
     out_of_range() {
         let h = this.y + this.scene.player.y
-        log(this.scene.player.y, this.y)
-        if (this.y < 79) {
+        if (this.y < 10) {
             return true
         }
         return false
